@@ -1615,10 +1615,16 @@ class HomeState extends State<HomePage> {
                                                                                                             alignment: Alignment.center,
                                                                                                             child: ElevatedButton(
                                                                                                                 onPressed: () {
+                                                                                                                  if (_formKey.currentState!.validate()) {
+                                                                                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                      const SnackBar(content: Text('Submiting Data')),
+                                                                                                                    );
+                                                                                                                  }
+                                                                                                                  
                                                                                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => ThankYou()));
                                                                                                                 },
                                                                                                                 //TODO add record data fucntionlity
-                                                                                                                //TODO add validation check function
+                                                                                                             
                                                                                                                 //TODO add validation for the entire form.
 
                                                                                                                 child: Text('Submit',
