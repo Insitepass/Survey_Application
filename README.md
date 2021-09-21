@@ -1,4 +1,4 @@
-# survey_app
+# survey_application
 
 A new Flutter project.
 

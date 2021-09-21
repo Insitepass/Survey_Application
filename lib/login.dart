@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:survey_app/resetpassword.dart';
+import 'package:survey_application/Intro.dart';
+import 'package:survey_application/home.dart';
+import 'package:survey_application/resetpassword.dart';
 import 'signUp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class LoginPage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => new _State();
 }
 
 class _State extends State<LoginPage> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +38,13 @@ class _State extends State<LoginPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    controller: emailController,
                     decoration: InputDecoration(
-                      fillColor: Colors.white, filled: true,
+                      fillColor: Colors.white,
+                      filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50.0),
-                        ),
+                      ),
                       labelText: 'User Name',
                     ),
                   ),
@@ -49,14 +55,14 @@ class _State extends State<LoginPage> {
                     obscureText: true,
                     controller: passwordController,
                     decoration: InputDecoration(
-                      fillColor: Colors.white, filled: true,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0)
-                      ),
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(50.0)),
                       labelText: 'Password',
                     ),
                   ),
                 ),
-               
                 Container(
                     height: 40,
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -64,45 +70,60 @@ class _State extends State<LoginPage> {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.black,
                         textStyle: TextStyle(
-                          fontSize: 20,
-                         fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0)
-                            ),
-                         ),
-                    child: Text('Login'),
-                      onPressed: () {
-                        print(nameController.text);
-                        print(passwordController.text);
-                      },
-                      
-                    )),
+                            borderRadius: BorderRadius.circular(50.0)),
+                      ),
+                      child: Text('Login'),
+                      onPressed: () async {
+                        try {
+                                    await _auth.signInWithEmailAndPassword(
+                                        email: emailController.text, password: passwordController.text);
+
+                                    await Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (contex) => HomePage(),
+                                      ),
+                                    );
+                                         
+                            } on FirebaseAuthException catch (e) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text("Ops! Login Failed"),
+                                        content: Text('${e.message}'),
+
+                                        ));
+                             }
+                      }
+                    )
+                  ),
                 Container(
                     child: Row(
-                      children: <Widget>[
-                        Text('Does not have account?'),
-                        TextButton(
-                          //textColor: Colors.blue,
-                          child: Text(
-                            'Sign in',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                            context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()),
+                  children: <Widget>[
+                    Text('Does not have account?'),
+                    TextButton(
+                      //textColor: Colors.blue,
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignUpPage()),
                         );
-                          },
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    )),
-               TextButton(
-                  onPressed: (){
+                      },
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                )),
+                TextButton(
+                  onPressed: () {
                     Navigator.push(
-                            context,
-                        MaterialPageRoute(builder: (context) => ResetPassword()),
-                        );
+                      context,
+                      MaterialPageRoute(builder: (context) => ResetPassword()),
+                    );
                     //forgot password screen
                   },
                   //textColor: Colors.blue,
