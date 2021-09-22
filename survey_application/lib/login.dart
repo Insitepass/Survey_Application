@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:survey_application/Intro.dart';
+import 'package:survey_application/home.dart';
 import 'package:survey_application/resetpassword.dart';
 import 'signUp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,8 +12,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _State extends State<LoginPage> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +38,7 @@ class _State extends State<LoginPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    controller: emailController,
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       filled: true,
@@ -69,16 +75,29 @@ class _State extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(50.0)),
                       ),
                       child: Text('Login'),
-                      onPressed: () {
-                        print(nameController.text);
-                        print(passwordController.text);
+                      onPressed: () async {
+                        try {
+                                    await _auth.signInWithEmailAndPassword(
+                                        email: emailController.text, password: passwordController.text);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => IntroPages()),
-                        );
-                      },
-                    )),
+                                    await Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (contex) => HomePage(),
+                                      ),
+                                    );
+                                         
+                            } on FirebaseAuthException catch (e) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text("Ops! Login Failed"),
+                                        content: Text('${e.message}'),
+
+                                        ));
+                             }
+                      }
+                    )
+                  ),
                 Container(
                     child: Row(
                   children: <Widget>[
@@ -114,3 +133,4 @@ class _State extends State<LoginPage> {
             )));
   }
 }
+
