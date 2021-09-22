@@ -82,7 +82,7 @@ class _State extends State<LoginPage> {
 
                                     await Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (contex) => HomePage(),
+                                        builder: (contex) => IntroPages(),
                                       ),
                                     );
                                          
