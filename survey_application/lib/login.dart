@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_application/Intro.dart';
-import 'package:survey_application/home.dart';
 import 'package:survey_application/resetpassword.dart';
 import 'signUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
