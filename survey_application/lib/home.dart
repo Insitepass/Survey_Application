@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_application/thankyou.dart';
@@ -7,33 +8,91 @@ class HomePage extends StatefulWidget {
   HomeState createState() => HomeState();
 }
 
+// answers enum
+enum Q1Answer {
+  noAnswer,
+  StronglyDisagree,
+  Disagree,
+  Neutral,
+  Agree,
+  StronglyAgree
+}
+
+enum Q2Answer { noAnswer, none, Anually, Quarterly, Monthly }
+
+//Q3 are the checkboxes
+enum Q4Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q5Answer { noAnswer, Option1, Option2, Option3, AlloftheAbove }
+enum Q6Answer { noAnswer, Frequently, Sometimes, AlltheTime, Never }
+enum Q7Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q8Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q9Answer { noAnswer, option1, Option2, Option3, AlloftheAbove }
+enum Q10Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q11Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q12Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q13Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q14Answer { noAnswer, Smushing, ExecutivePhishing, ClonePhishing, Whaling }
+enum Q15Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q16Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q17Answer {
+  noAnswer,
+  VPN,
+  ManagedRouter,
+  NetworkIntrusionPreventSystem,
+  VOIP
+}
+enum Q18Answer {
+  noAnswer,
+  PrivacyPolicy,
+  DataDisclosureAgreement,
+  DataGuidelines,
+  PrivacyDisclosureAgreement
+}
+enum Q19Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q20Answer {
+  noAnswer,
+  Government,
+  SocialMedia,
+  InformationalNews,
+  AlloftheAbove
+}
+enum Q21Answer { noAnswer, Option1, Option2, Option3, Option4 }
+enum Q22Answer { noAnswer, Ransomware, Threatware, Malware, Spyware }
+enum Q23Answer {
+  noAnswer,
+  StronglyDisagree,
+  Disagree,
+  Neutral,
+  Agree,
+  StronglyAgree
+}
+
 class HomeState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameField;
   // radio buttons values
-  int id = 0;
-  int id2 = 0;
-  int id3 = 0;
-  int id4 = 0;
-  int id5 = 0;
-  int id6 = 0;
-  int id7 = 0;
-  int id8 = 0;
-  int id9 = 0;
-  int id10 = 0;
-  int id11 = 0;
-  int id12 = 0;
-  int id13 = 0;
-  int id14 = 0;
-  int id15 = 0;
-  int id16 = 0;
-  int id17 = 0;
-  int id18 = 0;
-  int id19 = 0;
-  int id20 = 0;
-  int id21 = 0;
-  int id22 = 0;
-  int id23 = 0;
+  Q1Answer? _q1answer = Q1Answer.noAnswer;
+  Q2Answer? _q2answer = Q2Answer.noAnswer;
+  Q4Answer? _q4answer = Q4Answer.noAnswer;
+  Q5Answer? _q5answer = Q5Answer.noAnswer;
+  Q6Answer? _q6answer = Q6Answer.noAnswer;
+  Q7Answer? _q7answer = Q7Answer.noAnswer;
+  Q8Answer? _q8answer = Q8Answer.noAnswer;
+  Q9Answer? _q9answer = Q9Answer.noAnswer;
+  Q10Answer? _q10answer = Q10Answer.noAnswer;
+  Q11Answer? _q11answer = Q11Answer.noAnswer;
+  Q12Answer? _q12answer = Q12Answer.noAnswer;
+  Q13Answer? _q13answer = Q13Answer.noAnswer;
+  Q14Answer? _q14answer = Q14Answer.noAnswer;
+  Q15Answer? _q15answer = Q15Answer.noAnswer;
+  Q16Answer? _q16answer = Q16Answer.noAnswer;
+  Q17Answer? _q17answer = Q17Answer.noAnswer;
+  Q18Answer? _q18answer = Q18Answer.noAnswer;
+  Q19Answer? _q19answer = Q19Answer.noAnswer;
+  Q20Answer? _q20answer = Q20Answer.noAnswer;
+  Q21Answer? _q21answer = Q21Answer.noAnswer;
+  Q22Answer? _q22answer = Q22Answer.noAnswer;
+  Q23Answer? _q23answer = Q23Answer.noAnswer;
 
   // checkbox values
   Map<String, bool> values = {
@@ -135,56 +194,56 @@ class HomeState extends State<HomePage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Radio(
-                                              value: 1,
-                                              groupValue: id,
-                                              onChanged: (val) {
+                                          Radio<Q1Answer>(
+                                              value: Q1Answer.StronglyDisagree,
+                                              groupValue: _q1answer,
+                                              onChanged: (Q1Answer? value) {
                                                 setState(() {
-                                                  id = 1;
+                                                  _q1answer = value;
                                                 });
                                               }),
                                           Text('Strongly Disagree',
                                               style:
                                                   new TextStyle(fontSize: 16)),
-                                          Radio(
-                                              value: 2,
-                                              groupValue: id,
-                                              onChanged: (val) {
+                                          Radio<Q1Answer>(
+                                              value: Q1Answer.Disagree,
+                                              groupValue: _q1answer,
+                                              onChanged: (Q1Answer? value) {
                                                 setState(() {
-                                                  id = 2;
+                                                  _q1answer = value;
                                                 });
                                               }),
                                           Text('Disagree',
                                               style:
                                                   new TextStyle(fontSize: 16)),
-                                          Radio(
-                                              value: 3,
-                                              groupValue: id,
-                                              onChanged: (val) {
+                                          Radio<Q1Answer>(
+                                              value: Q1Answer.Neutral,
+                                              groupValue: _q1answer,
+                                              onChanged: (Q1Answer? value) {
                                                 setState(() {
-                                                  id = 3;
+                                                  _q1answer = value;
                                                 });
                                               }),
                                           Text('Neutral',
                                               style:
                                                   new TextStyle(fontSize: 16)),
-                                          Radio(
-                                              value: 4,
-                                              groupValue: id,
-                                              onChanged: (val) {
+                                          Radio<Q1Answer>(
+                                              value: Q1Answer.Agree,
+                                              groupValue: _q1answer,
+                                              onChanged: (Q1Answer? value) {
                                                 setState(() {
-                                                  id = 4;
+                                                  _q1answer = value;
                                                 });
                                               }),
                                           Text('Agree',
                                               style:
                                                   new TextStyle(fontSize: 16)),
-                                          Radio(
-                                              value: 5,
-                                              groupValue: id,
-                                              onChanged: (val) {
+                                          Radio<Q1Answer>(
+                                              value: Q1Answer.StronglyAgree,
+                                              groupValue: _q1answer,
+                                              onChanged: (Q1Answer? value) {
                                                 setState(() {
-                                                  id = 5;
+                                                  _q1answer = value;
                                                 });
                                               }),
                                           Text(' Strongly Agree',
@@ -211,45 +270,45 @@ class HomeState extends State<HomePage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Radio(
-                                              value: 1,
-                                              groupValue: id2,
-                                              onChanged: (val) {
+                                          Radio<Q2Answer>(
+                                              value: Q2Answer.none,
+                                              groupValue: _q2answer,
+                                              onChanged: (Q2Answer? value) {
                                                 setState(() {
-                                                  id2 = 1;
+                                                  _q2answer = value;
                                                 });
                                               }),
                                           Text('None',
                                               style:
                                                   new TextStyle(fontSize: 16)),
-                                          Radio(
-                                              value: 2,
-                                              groupValue: id2,
-                                              onChanged: (val) {
+                                          Radio<Q2Answer>(
+                                              value: Q2Answer.Anually,
+                                              groupValue: _q2answer,
+                                              onChanged: (Q2Answer? value) {
                                                 setState(() {
-                                                  id2 = 2;
+                                                  _q2answer = value;
                                                 });
                                               }),
                                           Text('Once(Anually)',
                                               style:
                                                   new TextStyle(fontSize: 16)),
-                                          Radio(
-                                              value: 3,
-                                              groupValue: id2,
-                                              onChanged: (val) {
+                                          Radio<Q2Answer>(
+                                              value: Q2Answer.Quarterly,
+                                              groupValue: _q2answer,
+                                              onChanged: (Q2Answer? value) {
                                                 setState(() {
-                                                  id2 = 3;
+                                                  _q2answer = value;
                                                 });
                                               }),
                                           Text('4 times(Quarterly)',
                                               style:
                                                   new TextStyle(fontSize: 16)),
-                                          Radio(
-                                              value: 4,
-                                              groupValue: id2,
-                                              onChanged: (val) {
+                                          Radio<Q2Answer>(
+                                              value: Q2Answer.Monthly,
+                                              groupValue: _q2answer,
+                                              onChanged: (Q2Answer? value) {
                                                 setState(() {
-                                                  id2 = 4;
+                                                  _q2answer = value;
                                                 });
                                               }),
                                           Text('10 -12 times (monthly)',
@@ -276,6 +335,7 @@ class HomeState extends State<HomePage> {
                                 SizedBox(
                                   height: 20,
                                 ),
+                                //TODO enter checkbox values into firebase.
                                 Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -323,12 +383,13 @@ class HomeState extends State<HomePage> {
                                               shrinkWrap: true,
                                               children: [
                                                 ListTile(
-                                                  leading: Radio(
-                                                      value: 1,
-                                                      groupValue: id3,
-                                                      onChanged: (val) {
+                                                  leading: Radio<Q4Answer>(
+                                                      value: Q4Answer.Option1,
+                                                      groupValue: _q4answer,
+                                                      onChanged:
+                                                          (Q4Answer? value) {
                                                         setState(() {
-                                                          id3 = 1;
+                                                          _q4answer = value;
                                                         });
                                                       }),
                                                   title: Text(
@@ -337,12 +398,13 @@ class HomeState extends State<HomePage> {
                                                           fontSize: 16)),
                                                 ),
                                                 ListTile(
-                                                  leading: Radio(
-                                                      value: 2,
-                                                      groupValue: id3,
-                                                      onChanged: (val) {
+                                                  leading: Radio<Q4Answer>(
+                                                      value: Q4Answer.Option2,
+                                                      groupValue: _q4answer,
+                                                      onChanged:
+                                                          (Q4Answer? value) {
                                                         setState(() {
-                                                          id3 = 2;
+                                                          _q4answer = value;
                                                         });
                                                       }),
                                                   title: Text(
@@ -351,12 +413,13 @@ class HomeState extends State<HomePage> {
                                                           fontSize: 16)),
                                                 ),
                                                 ListTile(
-                                                  leading: Radio(
-                                                      value: 3,
-                                                      groupValue: id3,
-                                                      onChanged: (val) {
+                                                  leading: Radio<Q4Answer>(
+                                                      value: Q4Answer.Option3,
+                                                      groupValue: _q4answer,
+                                                      onChanged:
+                                                          (Q4Answer? value) {
                                                         setState(() {
-                                                          id3 = 3;
+                                                          _q4answer = value;
                                                         });
                                                       }),
                                                   title: Text(
@@ -365,12 +428,13 @@ class HomeState extends State<HomePage> {
                                                           fontSize: 16)),
                                                 ),
                                                 ListTile(
-                                                  leading: Radio(
-                                                      value: 4,
-                                                      groupValue: id3,
-                                                      onChanged: (val) {
+                                                  leading: Radio<Q4Answer>(
+                                                      value: Q4Answer.Option4,
+                                                      groupValue: _q4answer,
+                                                      onChanged:
+                                                          (Q4Answer? value) {
                                                         setState(() {
-                                                          id3 = 4;
+                                                          _q4answer = value;
                                                         });
                                                       }),
                                                   title: Text(
@@ -401,14 +465,20 @@ class HomeState extends State<HomePage> {
                                                     shrinkWrap: true,
                                                     children: [
                                                       ListTile(
-                                                        leading: Radio(
-                                                            value: 1,
-                                                            groupValue: id4,
-                                                            onChanged: (val) {
-                                                              setState(() {
-                                                                id4 = 1;
-                                                              });
-                                                            }),
+                                                        leading:
+                                                            Radio<Q5Answer>(
+                                                                value: Q5Answer
+                                                                    .Option1,
+                                                                groupValue:
+                                                                    _q5answer,
+                                                                onChanged:
+                                                                    (Q5Answer?
+                                                                        value) {
+                                                                  setState(() {
+                                                                    _q5answer =
+                                                                        value;
+                                                                  });
+                                                                }),
                                                         title: Text(
                                                             'Report the message as suspicious using the appropriate email tool.',
                                                             style:
@@ -417,14 +487,20 @@ class HomeState extends State<HomePage> {
                                                                         16)),
                                                       ),
                                                       ListTile(
-                                                        leading: Radio(
-                                                            value: 2,
-                                                            groupValue: id4,
-                                                            onChanged: (val) {
-                                                              setState(() {
-                                                                id4 = 2;
-                                                              });
-                                                            }),
+                                                        leading:
+                                                            Radio<Q5Answer>(
+                                                                value: Q5Answer
+                                                                    .Option2,
+                                                                groupValue:
+                                                                    _q5answer,
+                                                                onChanged:
+                                                                    (Q5Answer?
+                                                                        value) {
+                                                                  setState(() {
+                                                                    _q5answer =
+                                                                        value;
+                                                                  });
+                                                                }),
                                                         title: Text(
                                                             'Reply to the sender,telling them you know this is a scam.',
                                                             style:
@@ -433,14 +509,20 @@ class HomeState extends State<HomePage> {
                                                                         16)),
                                                       ),
                                                       ListTile(
-                                                        leading: Radio(
-                                                            value: 3,
-                                                            groupValue: id4,
-                                                            onChanged: (val) {
-                                                              setState(() {
-                                                                id4 = 3;
-                                                              });
-                                                            }),
+                                                        leading:
+                                                            Radio<Q5Answer>(
+                                                                value: Q5Answer
+                                                                    .Option3,
+                                                                groupValue:
+                                                                    _q5answer,
+                                                                onChanged:
+                                                                    (Q5Answer?
+                                                                        value) {
+                                                                  setState(() {
+                                                                    _q5answer =
+                                                                        value;
+                                                                  });
+                                                                }),
                                                         title: Text(
                                                             'Ignore the request and delete the message.',
                                                             style:
@@ -449,12 +531,18 @@ class HomeState extends State<HomePage> {
                                                                         16)),
                                                       ),
                                                       ListTile(
-                                                        leading: Radio(
-                                                            value: 4,
-                                                            groupValue: id4,
-                                                            onChanged: (val) {
+                                                        leading: Radio<
+                                                                Q5Answer>(
+                                                            value: Q5Answer
+                                                                .AlloftheAbove,
+                                                            groupValue:
+                                                                _q5answer,
+                                                            onChanged:
+                                                                (Q5Answer?
+                                                                    value) {
                                                               setState(() {
-                                                                id4 = 4;
+                                                                _q5answer =
+                                                                    value;
                                                               });
                                                             }),
                                                         title: Text(
@@ -487,15 +575,19 @@ class HomeState extends State<HomePage> {
                                                           shrinkWrap: true,
                                                           children: [
                                                             ListTile(
-                                                              leading: Radio(
-                                                                  value: 1,
+                                                              leading: Radio<
+                                                                      Q6Answer>(
+                                                                  value: Q6Answer
+                                                                      .Frequently,
                                                                   groupValue:
-                                                                      id5,
+                                                                      _q6answer,
                                                                   onChanged:
-                                                                      (val) {
+                                                                      (Q6Answer?
+                                                                          value) {
                                                                     setState(
                                                                         () {
-                                                                      id5 = 1;
+                                                                      _q6answer =
+                                                                          value;
                                                                     });
                                                                   }),
                                                               title: Text(
@@ -505,15 +597,19 @@ class HomeState extends State<HomePage> {
                                                                           16)),
                                                             ),
                                                             ListTile(
-                                                              leading: Radio(
-                                                                  value: 2,
+                                                              leading: Radio<
+                                                                      Q6Answer>(
+                                                                  value: Q6Answer
+                                                                      .Sometimes,
                                                                   groupValue:
-                                                                      id5,
+                                                                      _q6answer,
                                                                   onChanged:
-                                                                      (val) {
+                                                                      (Q6Answer?
+                                                                          value) {
                                                                     setState(
                                                                         () {
-                                                                      id5 = 2;
+                                                                      _q6answer =
+                                                                          value;
                                                                     });
                                                                   }),
                                                               title: Text(
@@ -523,15 +619,19 @@ class HomeState extends State<HomePage> {
                                                                           16)),
                                                             ),
                                                             ListTile(
-                                                              leading: Radio(
-                                                                  value: 3,
+                                                              leading: Radio<
+                                                                      Q6Answer>(
+                                                                  value: Q6Answer
+                                                                      .AlltheTime,
                                                                   groupValue:
-                                                                      id5,
+                                                                      _q6answer,
                                                                   onChanged:
-                                                                      (val) {
+                                                                      (Q6Answer?
+                                                                          value) {
                                                                     setState(
                                                                         () {
-                                                                      id5 = 3;
+                                                                      _q6answer =
+                                                                          value;
                                                                     });
                                                                   }),
                                                               title: Text(
@@ -541,15 +641,19 @@ class HomeState extends State<HomePage> {
                                                                           16)),
                                                             ),
                                                             ListTile(
-                                                              leading: Radio(
-                                                                  value: 4,
+                                                              leading: Radio<
+                                                                      Q6Answer>(
+                                                                  value: Q6Answer
+                                                                      .Never,
                                                                   groupValue:
-                                                                      id5,
+                                                                      _q6answer,
                                                                   onChanged:
-                                                                      (val) {
+                                                                      (Q6Answer?
+                                                                          value) {
                                                                     setState(
                                                                         () {
-                                                                      id5 = 4;
+                                                                      _q6answer =
+                                                                          value;
                                                                     });
                                                                   }),
                                                               title: Text(
@@ -582,14 +686,19 @@ class HomeState extends State<HomePage> {
                                                                     true,
                                                                 children: [
                                                                   ListTile(
-                                                                    leading: Radio(
-                                                                        value: 1,
-                                                                        groupValue: id6,
-                                                                        onChanged: (val) {
+                                                                    leading: Radio<
+                                                                            Q7Answer>(
+                                                                        value: Q7Answer
+                                                                            .Option1,
+                                                                        groupValue:
+                                                                            _q7answer,
+                                                                        onChanged:
+                                                                            (Q7Answer?
+                                                                                value) {
                                                                           setState(
                                                                               () {
-                                                                            id6 =
-                                                                                1;
+                                                                            _q7answer =
+                                                                                value;
                                                                           });
                                                                         }),
                                                                     title: Text(
@@ -599,14 +708,19 @@ class HomeState extends State<HomePage> {
                                                                                 16)),
                                                                   ),
                                                                   ListTile(
-                                                                    leading: Radio(
-                                                                        value: 2,
-                                                                        groupValue: id6,
-                                                                        onChanged: (val) {
+                                                                    leading: Radio<
+                                                                            Q7Answer>(
+                                                                        value: Q7Answer
+                                                                            .Option2,
+                                                                        groupValue:
+                                                                            _q7answer,
+                                                                        onChanged:
+                                                                            (Q7Answer?
+                                                                                value) {
                                                                           setState(
                                                                               () {
-                                                                            id6 =
-                                                                                2;
+                                                                            _q7answer =
+                                                                                value;
                                                                           });
                                                                         }),
                                                                     title: Text(
@@ -616,14 +730,19 @@ class HomeState extends State<HomePage> {
                                                                                 16)),
                                                                   ),
                                                                   ListTile(
-                                                                    leading: Radio(
-                                                                        value: 3,
-                                                                        groupValue: id6,
-                                                                        onChanged: (val) {
+                                                                    leading: Radio<
+                                                                            Q7Answer>(
+                                                                        value: Q7Answer
+                                                                            .Option3,
+                                                                        groupValue:
+                                                                            _q7answer,
+                                                                        onChanged:
+                                                                            (Q7Answer?
+                                                                                value) {
                                                                           setState(
                                                                               () {
-                                                                            id6 =
-                                                                                3;
+                                                                            _q7answer =
+                                                                                value;
                                                                           });
                                                                         }),
                                                                     title: Text(
@@ -633,14 +752,19 @@ class HomeState extends State<HomePage> {
                                                                                 16)),
                                                                   ),
                                                                   ListTile(
-                                                                    leading: Radio(
-                                                                        value: 4,
-                                                                        groupValue: id6,
-                                                                        onChanged: (val) {
+                                                                    leading: Radio<
+                                                                            Q7Answer>(
+                                                                        value: Q7Answer
+                                                                            .Option4,
+                                                                        groupValue:
+                                                                            _q7answer,
+                                                                        onChanged:
+                                                                            (Q7Answer?
+                                                                                value) {
                                                                           setState(
                                                                               () {
-                                                                            id6 =
-                                                                                4;
+                                                                            _q7answer =
+                                                                                value;
                                                                           });
                                                                         }),
                                                                     title: Text(
@@ -673,12 +797,12 @@ class HomeState extends State<HomePage> {
                                                                           true,
                                                                       children: [
                                                                         ListTile(
-                                                                          leading: Radio(
-                                                                              value: 1,
-                                                                              groupValue: id7,
-                                                                              onChanged: (val) {
+                                                                          leading: Radio<Q8Answer>(
+                                                                              value: Q8Answer.Option1,
+                                                                              groupValue: _q8answer,
+                                                                              onChanged: (Q8Answer? value) {
                                                                                 setState(() {
-                                                                                  id7 = 1;
+                                                                                  _q8answer = value;
                                                                                 });
                                                                               }),
                                                                           title: Text(
@@ -686,12 +810,12 @@ class HomeState extends State<HomePage> {
                                                                               style: new TextStyle(fontSize: 16)),
                                                                         ),
                                                                         ListTile(
-                                                                          leading: Radio(
-                                                                              value: 2,
-                                                                              groupValue: id7,
-                                                                              onChanged: (val) {
+                                                                          leading: Radio<Q8Answer>(
+                                                                              value: Q8Answer.Option2,
+                                                                              groupValue: _q8answer,
+                                                                              onChanged: (Q8Answer? value) {
                                                                                 setState(() {
-                                                                                  id7 = 2;
+                                                                                  _q8answer = value;
                                                                                 });
                                                                               }),
                                                                           title: Text(
@@ -700,12 +824,12 @@ class HomeState extends State<HomePage> {
                                                                               style: new TextStyle(fontSize: 16)),
                                                                         ),
                                                                         ListTile(
-                                                                          leading: Radio(
-                                                                              value: 3,
-                                                                              groupValue: id7,
-                                                                              onChanged: (val) {
+                                                                          leading: Radio<Q8Answer>(
+                                                                              value: Q8Answer.Option3,
+                                                                              groupValue: _q8answer,
+                                                                              onChanged: (Q8Answer? value) {
                                                                                 setState(() {
-                                                                                  id7 = 3;
+                                                                                  _q8answer = value;
                                                                                 });
                                                                               }),
                                                                           title: Text(
@@ -713,12 +837,12 @@ class HomeState extends State<HomePage> {
                                                                               style: new TextStyle(fontSize: 16)),
                                                                         ),
                                                                         ListTile(
-                                                                          leading: Radio(
-                                                                              value: 4,
-                                                                              groupValue: id7,
-                                                                              onChanged: (val) {
+                                                                          leading: Radio<Q8Answer>(
+                                                                              value: Q8Answer.Option4,
+                                                                              groupValue: _q8answer,
+                                                                              onChanged: (Q8Answer? value) {
                                                                                 setState(() {
-                                                                                  id7 = 4;
+                                                                                  _q8answer = value;
                                                                                 });
                                                                               }),
                                                                           title: Text(
@@ -747,45 +871,45 @@ class HomeState extends State<HomePage> {
                                                                                 true,
                                                                             children: [
                                                                               ListTile(
-                                                                                leading: Radio(
-                                                                                    value: 1,
-                                                                                    groupValue: id8,
-                                                                                    onChanged: (val) {
+                                                                                leading: Radio<Q9Answer>(
+                                                                                    value: Q9Answer.option1,
+                                                                                    groupValue: _q9answer,
+                                                                                    onChanged: (Q9Answer? value) {
                                                                                       setState(() {
-                                                                                        id8 = 1;
+                                                                                        _q9answer = value;
                                                                                       });
                                                                                     }),
                                                                                 title: Text('Always think before you click.', style: new TextStyle(fontSize: 16)),
                                                                               ),
                                                                               ListTile(
-                                                                                leading: Radio(
-                                                                                    value: 2,
-                                                                                    groupValue: id8,
-                                                                                    onChanged: (val) {
+                                                                                leading: Radio<Q9Answer>(
+                                                                                    value: Q9Answer.Option2,
+                                                                                    groupValue: _q9answer,
+                                                                                    onChanged: (Q9Answer? value) {
                                                                                       setState(() {
-                                                                                        id8 = 2;
+                                                                                        _q9answer = value;
                                                                                       });
                                                                                     }),
                                                                                 title: Text('Trust the antivirus software will protect you', style: new TextStyle(fontSize: 16)),
                                                                               ),
                                                                               ListTile(
-                                                                                leading: Radio(
-                                                                                    value: 3,
-                                                                                    groupValue: id8,
-                                                                                    onChanged: (val) {
+                                                                                leading: Radio<Q9Answer>(
+                                                                                    value: Q9Answer.Option3,
+                                                                                    groupValue: _q9answer,
+                                                                                    onChanged: (Q9Answer? value) {
                                                                                       setState(() {
-                                                                                        id8 = 3;
+                                                                                        _q9answer = value;
                                                                                       });
                                                                                     }),
                                                                                 title: Text('Email the sender to verify links in unexpected emails', style: new TextStyle(fontSize: 16)),
                                                                               ),
                                                                               ListTile(
-                                                                                leading: Radio(
-                                                                                    value: 4,
-                                                                                    groupValue: id8,
-                                                                                    onChanged: (val) {
+                                                                                leading: Radio<Q9Answer>(
+                                                                                    value: Q9Answer.AlloftheAbove,
+                                                                                    groupValue: _q9answer,
+                                                                                    onChanged: (Q9Answer? value) {
                                                                                       setState(() {
-                                                                                        id8 = 4;
+                                                                                        _q9answer = value;
                                                                                       });
                                                                                     }),
                                                                                 title: Text('All of the above', style: new TextStyle(fontSize: 16)),
@@ -807,45 +931,45 @@ class HomeState extends State<HomePage> {
                                                                                   shrinkWrap: true,
                                                                                   children: [
                                                                                     ListTile(
-                                                                                      leading: Radio(
-                                                                                          value: 1,
-                                                                                          groupValue: id9,
-                                                                                          onChanged: (val) {
+                                                                                      leading: Radio<Q10Answer>(
+                                                                                          value: Q10Answer.Option1,
+                                                                                          groupValue: _q10answer,
+                                                                                          onChanged: (Q10Answer? value) {
                                                                                             setState(() {
-                                                                                              id9 = 1;
+                                                                                              _q10answer = value;
                                                                                             });
                                                                                           }),
                                                                                       title: Text('Safe to open if antivirus software is installed.', style: new TextStyle(fontSize: 16)),
                                                                                     ),
                                                                                     ListTile(
-                                                                                      leading: Radio(
-                                                                                          value: 2,
-                                                                                          groupValue: id9,
-                                                                                          onChanged: (val) {
+                                                                                      leading: Radio<Q10Answer>(
+                                                                                          value: Q10Answer.Option2,
+                                                                                          groupValue: _q10answer,
+                                                                                          onChanged: (Q10Answer? value) {
                                                                                             setState(() {
-                                                                                              id9 = 2;
+                                                                                              _q10answer = value;
                                                                                             });
                                                                                           }),
                                                                                       title: Text('Safe to open after checking with the IT team.', style: new TextStyle(fontSize: 16)),
                                                                                     ),
                                                                                     ListTile(
-                                                                                      leading: Radio(
-                                                                                          value: 3,
-                                                                                          groupValue: id9,
-                                                                                          onChanged: (val) {
+                                                                                      leading: Radio<Q10Answer>(
+                                                                                          value: Q10Answer.Option3,
+                                                                                          groupValue: _q10answer,
+                                                                                          onChanged: (Q10Answer? value) {
                                                                                             setState(() {
-                                                                                              id9 = 3;
+                                                                                              _q10answer = value;
                                                                                             });
                                                                                           }),
                                                                                       title: Text('Never safe to open', style: new TextStyle(fontSize: 16)),
                                                                                     ),
                                                                                     ListTile(
-                                                                                      leading: Radio(
-                                                                                          value: 4,
-                                                                                          groupValue: id9,
-                                                                                          onChanged: (val) {
+                                                                                      leading: Radio<Q10Answer>(
+                                                                                          value: Q10Answer.Option4,
+                                                                                          groupValue: _q10answer,
+                                                                                          onChanged: (Q10Answer? value) {
                                                                                             setState(() {
-                                                                                              id9 = 4;
+                                                                                              _q10answer = value;
                                                                                             });
                                                                                           }),
                                                                                       title: Text('Safe to open anytime', style: new TextStyle(fontSize: 16)),
@@ -864,45 +988,45 @@ class HomeState extends State<HomePage> {
                                                                                     shrinkWrap: true,
                                                                                     children: [
                                                                                       ListTile(
-                                                                                        leading: Radio(
-                                                                                            value: 1,
-                                                                                            groupValue: id10,
-                                                                                            onChanged: (val) {
+                                                                                        leading: Radio<Q11Answer>(
+                                                                                            value: Q11Answer.Option1,
+                                                                                            groupValue: _q11answer,
+                                                                                            onChanged: (Q11Answer? value) {
                                                                                               setState(() {
-                                                                                                id10 = 1;
+                                                                                                _q11answer = value;
                                                                                               });
                                                                                             }),
                                                                                         title: Text('A picture of the menu from a meal you cooked.', style: new TextStyle(fontSize: 16)),
                                                                                       ),
                                                                                       ListTile(
-                                                                                        leading: Radio(
-                                                                                            value: 2,
-                                                                                            groupValue: id10,
-                                                                                            onChanged: (val) {
+                                                                                        leading: Radio<Q11Answer>(
+                                                                                            value: Q11Answer.Option2,
+                                                                                            groupValue: _q11answer,
+                                                                                            onChanged: (Q11Answer? value) {
                                                                                               setState(() {
-                                                                                                id10 = 2;
+                                                                                                _q11answer = value;
                                                                                               });
                                                                                             }),
                                                                                         title: Text('The video of your pet bird Joey singing a song.', style: new TextStyle(fontSize: 16)),
                                                                                       ),
                                                                                       ListTile(
-                                                                                        leading: Radio(
-                                                                                            value: 3,
-                                                                                            groupValue: id10,
-                                                                                            onChanged: (val) {
+                                                                                        leading: Radio<Q11Answer>(
+                                                                                            value: Q11Answer.Option3,
+                                                                                            groupValue: _q11answer,
+                                                                                            onChanged: (Q11Answer? value) {
                                                                                               setState(() {
-                                                                                                id10 = 3;
+                                                                                                _q11answer = value;
                                                                                               });
                                                                                             }),
                                                                                         title: Text('The promotion your organization just gave you.', style: new TextStyle(fontSize: 16)),
                                                                                       ),
                                                                                       ListTile(
-                                                                                        leading: Radio(
-                                                                                            value: 4,
-                                                                                            groupValue: id10,
-                                                                                            onChanged: (val) {
+                                                                                        leading: Radio<Q11Answer>(
+                                                                                            value: Q11Answer.Option4,
+                                                                                            groupValue: _q11answer,
+                                                                                            onChanged: (Q11Answer? value) {
                                                                                               setState(() {
-                                                                                                id10 = 4;
+                                                                                                _q11answer = value;
                                                                                               });
                                                                                             }),
                                                                                         title: Text('The pictures from your daughters birthday party.', style: new TextStyle(fontSize: 16)),
@@ -921,45 +1045,45 @@ class HomeState extends State<HomePage> {
                                                                                       shrinkWrap: true,
                                                                                       children: [
                                                                                         ListTile(
-                                                                                          leading: Radio(
-                                                                                              value: 1,
-                                                                                              groupValue: id11,
-                                                                                              onChanged: (val) {
+                                                                                          leading: Radio<Q12Answer>(
+                                                                                              value: Q12Answer.Option1,
+                                                                                              groupValue: _q12answer,
+                                                                                              onChanged: (Q12Answer? value) {
                                                                                                 setState(() {
-                                                                                                  id11 = 1;
+                                                                                                  _q12answer = value;
                                                                                                 });
                                                                                               }),
                                                                                           title: Text('Using technology to keep the bad humans out.', style: new TextStyle(fontSize: 16)),
                                                                                         ),
                                                                                         ListTile(
-                                                                                          leading: Radio(
-                                                                                              value: 2,
-                                                                                              groupValue: id11,
-                                                                                              onChanged: (val) {
+                                                                                          leading: Radio<Q12Answer>(
+                                                                                              value: Q12Answer.Option2,
+                                                                                              groupValue: _q12answer,
+                                                                                              onChanged: (Q12Answer? value) {
                                                                                                 setState(() {
-                                                                                                  id11 = 2;
+                                                                                                  _q12answer = value;
                                                                                                 });
                                                                                               }),
                                                                                           title: Text('Making ethical decisions while at work', style: new TextStyle(fontSize: 16)),
                                                                                         ),
                                                                                         ListTile(
-                                                                                          leading: Radio(
-                                                                                              value: 3,
-                                                                                              groupValue: id11,
-                                                                                              onChanged: (val) {
+                                                                                          leading: Radio<Q12Answer>(
+                                                                                              value: Q12Answer.Option3,
+                                                                                              groupValue: _q12answer,
+                                                                                              onChanged: (Q12Answer? value) {
                                                                                                 setState(() {
-                                                                                                  id11 = 3;
+                                                                                                  _q12answer = value;
                                                                                                 });
                                                                                               }),
                                                                                           title: Text('The human element of cyber security.', style: new TextStyle(fontSize: 16)),
                                                                                         ),
                                                                                         ListTile(
-                                                                                          leading: Radio(
-                                                                                              value: 4,
-                                                                                              groupValue: id11,
-                                                                                              onChanged: (val) {
+                                                                                          leading: Radio<Q12Answer>(
+                                                                                              value: Q12Answer.Option4,
+                                                                                              groupValue: _q12answer,
+                                                                                              onChanged: (Q12Answer? value) {
                                                                                                 setState(() {
-                                                                                                  id11 = 4;
+                                                                                                  _q12answer = value;
                                                                                                 });
                                                                                               }),
                                                                                           title: Text('Using AI to create a virtual wall that protects HR.', style: new TextStyle(fontSize: 16)),
@@ -978,45 +1102,45 @@ class HomeState extends State<HomePage> {
                                                                                         shrinkWrap: true,
                                                                                         children: [
                                                                                           ListTile(
-                                                                                            leading: Radio(
-                                                                                                value: 1,
-                                                                                                groupValue: id12,
-                                                                                                onChanged: (val) {
+                                                                                            leading: Radio<Q13Answer>(
+                                                                                                value: Q13Answer.Option1,
+                                                                                                groupValue: _q13answer,
+                                                                                                onChanged: (Q13Answer? value) {
                                                                                                   setState(() {
-                                                                                                    id12 = 1;
+                                                                                                    _q13answer = value;
                                                                                                   });
                                                                                                 }),
                                                                                             title: Text('Your bank asking you to respond back with your full account number.', style: new TextStyle(fontSize: 16)),
                                                                                           ),
                                                                                           ListTile(
-                                                                                            leading: Radio(
-                                                                                                value: 2,
-                                                                                                groupValue: id12,
-                                                                                                onChanged: (val) {
+                                                                                            leading: Radio<Q13Answer>(
+                                                                                                value: Q13Answer.Option2,
+                                                                                                groupValue: _q13answer,
+                                                                                                onChanged: (Q13Answer? value) {
                                                                                                   setState(() {
-                                                                                                    id12 = 2;
+                                                                                                    _q13answer = value;
                                                                                                   });
                                                                                                 }),
                                                                                             title: Text('Your credit card company asking you to respond back with the CVV number from your card', style: new TextStyle(fontSize: 16)),
                                                                                           ),
                                                                                           ListTile(
-                                                                                            leading: Radio(
-                                                                                                value: 3,
-                                                                                                groupValue: id12,
-                                                                                                onChanged: (val) {
+                                                                                            leading: Radio<Q13Answer>(
+                                                                                                value: Q13Answer.Option3,
+                                                                                                groupValue: _q13answer,
+                                                                                                onChanged: (Q13Answer? value) {
                                                                                                   setState(() {
-                                                                                                    id12 = 3;
+                                                                                                    _q13answer = value;
                                                                                                   });
                                                                                                 }),
                                                                                             title: Text('A local restaurant offering a free appetizer for being part of their rewards program', style: new TextStyle(fontSize: 16)),
                                                                                           ),
                                                                                           ListTile(
-                                                                                            leading: Radio(
-                                                                                                value: 4,
-                                                                                                groupValue: id12,
-                                                                                                onChanged: (val) {
+                                                                                            leading: Radio<Q13Answer>(
+                                                                                                value: Q13Answer.Option4,
+                                                                                                groupValue: _q13answer,
+                                                                                                onChanged: (Q13Answer? value) {
                                                                                                   setState(() {
-                                                                                                    id12 = 4;
+                                                                                                    _q13answer = value;
                                                                                                   });
                                                                                                 }),
                                                                                             title: Text('Your IT team asking you to follow a link to verify your network credentials', style: new TextStyle(fontSize: 16)),
@@ -1035,45 +1159,45 @@ class HomeState extends State<HomePage> {
                                                                                           shrinkWrap: true,
                                                                                           children: [
                                                                                             ListTile(
-                                                                                              leading: Radio(
-                                                                                                  value: 1,
-                                                                                                  groupValue: id13,
-                                                                                                  onChanged: (val) {
+                                                                                              leading: Radio<Q14Answer>(
+                                                                                                  value: Q14Answer.Smushing,
+                                                                                                  groupValue: _q14answer,
+                                                                                                  onChanged: (Q14Answer? value) {
                                                                                                     setState(() {
-                                                                                                      id13 = 1;
+                                                                                                      _q14answer = value;
                                                                                                     });
                                                                                                   }),
                                                                                               title: Text('Smushing.', style: new TextStyle(fontSize: 16)),
                                                                                             ),
                                                                                             ListTile(
-                                                                                              leading: Radio(
-                                                                                                  value: 2,
-                                                                                                  groupValue: id13,
-                                                                                                  onChanged: (val) {
+                                                                                              leading: Radio<Q14Answer>(
+                                                                                                  value: Q14Answer.ExecutivePhishing,
+                                                                                                  groupValue: _q14answer,
+                                                                                                  onChanged: (Q14Answer? value) {
                                                                                                     setState(() {
-                                                                                                      id13 = 2;
+                                                                                                      _q14answer = value;
                                                                                                     });
                                                                                                   }),
                                                                                               title: Text('Executive Phishing', style: new TextStyle(fontSize: 16)),
                                                                                             ),
                                                                                             ListTile(
-                                                                                              leading: Radio(
-                                                                                                  value: 3,
-                                                                                                  groupValue: id13,
-                                                                                                  onChanged: (val) {
+                                                                                              leading: Radio<Q14Answer>(
+                                                                                                  value: Q14Answer.ClonePhishing,
+                                                                                                  groupValue: _q14answer,
+                                                                                                  onChanged: (Q14Answer? value) {
                                                                                                     setState(() {
-                                                                                                      id13 = 3;
+                                                                                                      _q14answer = value;
                                                                                                     });
                                                                                                   }),
                                                                                               title: Text('Clone phishing', style: new TextStyle(fontSize: 16)),
                                                                                             ),
                                                                                             ListTile(
-                                                                                              leading: Radio(
-                                                                                                  value: 4,
-                                                                                                  groupValue: id13,
-                                                                                                  onChanged: (val) {
+                                                                                              leading: Radio<Q14Answer>(
+                                                                                                  value: Q14Answer.Whaling,
+                                                                                                  groupValue: _q14answer,
+                                                                                                  onChanged: (Q14Answer? value) {
                                                                                                     setState(() {
-                                                                                                      id13 = 4;
+                                                                                                      _q14answer = value;
                                                                                                     });
                                                                                                   }),
                                                                                               title: Text('Whaling', style: new TextStyle(fontSize: 16)),
@@ -1092,45 +1216,45 @@ class HomeState extends State<HomePage> {
                                                                                             shrinkWrap: true,
                                                                                             children: [
                                                                                               ListTile(
-                                                                                                leading: Radio(
-                                                                                                    value: 1,
-                                                                                                    groupValue: id14,
-                                                                                                    onChanged: (val) {
+                                                                                                leading: Radio<Q15Answer>(
+                                                                                                    value: Q15Answer.Option1,
+                                                                                                    groupValue: _q15answer,
+                                                                                                    onChanged: (Q15Answer? value) {
                                                                                                       setState(() {
-                                                                                                        id14 = 1;
+                                                                                                        _q15answer = value;
                                                                                                       });
                                                                                                     }),
                                                                                                 title: Text('Network security is increased beacuse the password is strong.', style: new TextStyle(fontSize: 16)),
                                                                                               ),
                                                                                               ListTile(
-                                                                                                leading: Radio(
-                                                                                                    value: 2,
-                                                                                                    groupValue: id14,
-                                                                                                    onChanged: (val) {
+                                                                                                leading: Radio<Q15Answer>(
+                                                                                                    value: Q15Answer.Option2,
+                                                                                                    groupValue: _q15answer,
+                                                                                                    onChanged: (Q15Answer? value) {
                                                                                                       setState(() {
-                                                                                                        id14 = 2;
+                                                                                                        _q15answer = value;
                                                                                                       });
                                                                                                     }),
                                                                                                 title: Text('Network security is increased beacuse multiple users have to protect the password', style: new TextStyle(fontSize: 16)),
                                                                                               ),
                                                                                               ListTile(
-                                                                                                leading: Radio(
-                                                                                                    value: 3,
-                                                                                                    groupValue: id14,
-                                                                                                    onChanged: (val) {
+                                                                                                leading: Radio<Q15Answer>(
+                                                                                                    value: Q15Answer.Option3,
+                                                                                                    groupValue: _q15answer,
+                                                                                                    onChanged: (Q15Answer? value) {
                                                                                                       setState(() {
-                                                                                                        id14 = 3;
+                                                                                                        _q15answer = value;
                                                                                                       });
                                                                                                     }),
                                                                                                 title: Text('Network security is decreased beacuse shared passwords are more easily guessed by hackers', style: new TextStyle(fontSize: 16)),
                                                                                               ),
                                                                                               ListTile(
-                                                                                                leading: Radio(
-                                                                                                    value: 4,
-                                                                                                    groupValue: id14,
-                                                                                                    onChanged: (val) {
+                                                                                                leading: Radio<Q15Answer>(
+                                                                                                    value: Q15Answer.Option4,
+                                                                                                    groupValue: _q15answer,
+                                                                                                    onChanged: (Q15Answer? value) {
                                                                                                       setState(() {
-                                                                                                        id14 = 4;
+                                                                                                        _q15answer = value;
                                                                                                       });
                                                                                                     }),
                                                                                                 title: Text('Network security is decreased because IT can not determine who used the password.', style: new TextStyle(fontSize: 16)),
@@ -1149,45 +1273,45 @@ class HomeState extends State<HomePage> {
                                                                                               shrinkWrap: true,
                                                                                               children: [
                                                                                                 ListTile(
-                                                                                                  leading: Radio(
-                                                                                                      value: 1,
-                                                                                                      groupValue: id15,
-                                                                                                      onChanged: (val) {
+                                                                                                  leading: Radio<Q16Answer>(
+                                                                                                      value: Q16Answer.Option1,
+                                                                                                      groupValue: _q16answer,
+                                                                                                      onChanged: (Q16Answer? value) {
                                                                                                         setState(() {
-                                                                                                          id15 = 1;
+                                                                                                          _q16answer = value;
                                                                                                         });
                                                                                                       }),
                                                                                                   title: Text('https://www(//www).Prime.com/A(htpp://me.com/A)mazon.', style: new TextStyle(fontSize: 16)),
                                                                                                 ),
                                                                                                 ListTile(
-                                                                                                  leading: Radio(
-                                                                                                      value: 2,
-                                                                                                      groupValue: id15,
-                                                                                                      onChanged: (val) {
+                                                                                                  leading: Radio<Q16Answer>(
+                                                                                                      value: Q16Answer.Option2,
+                                                                                                      groupValue: _q16answer,
+                                                                                                      onChanged: (Q16Answer? value) {
                                                                                                         setState(() {
-                                                                                                          id15 = 2;
+                                                                                                          _q16answer = value;
                                                                                                         });
                                                                                                       }),
                                                                                                   title: Text('https://www.a(https://www.a)mazOn.co(http://azon.co)m/', style: new TextStyle(fontSize: 16)),
                                                                                                 ),
                                                                                                 ListTile(
-                                                                                                  leading: Radio(
-                                                                                                      value: 3,
-                                                                                                      groupValue: id15,
-                                                                                                      onChanged: (val) {
+                                                                                                  leading: Radio<Q16Answer>(
+                                                                                                      value: Q16Answer.Option3,
+                                                                                                      groupValue: _q16answer,
+                                                                                                      onChanged: (Q16Answer? value) {
                                                                                                         setState(() {
-                                                                                                          id15 = 3;
+                                                                                                          _q16answer = value;
                                                                                                         });
                                                                                                       }),
                                                                                                   title: Text('https://www.a(//wwww.a)mazon.co(http://azon.co)m/', style: new TextStyle(fontSize: 16)),
                                                                                                 ),
                                                                                                 ListTile(
-                                                                                                  leading: Radio(
-                                                                                                      value: 4,
-                                                                                                      groupValue: id15,
-                                                                                                      onChanged: (val) {
+                                                                                                  leading: Radio<Q16Answer>(
+                                                                                                      value: Q16Answer.Option4,
+                                                                                                      groupValue: _q16answer,
+                                                                                                      onChanged: (Q16Answer? value) {
                                                                                                         setState(() {
-                                                                                                          id15 = 4;
+                                                                                                          _q16answer = value;
                                                                                                         });
                                                                                                       }),
                                                                                                   title: Text('https://www.amazon.com', style: new TextStyle(fontSize: 16)),
@@ -1206,45 +1330,45 @@ class HomeState extends State<HomePage> {
                                                                                                 shrinkWrap: true,
                                                                                                 children: [
                                                                                                   ListTile(
-                                                                                                    leading: Radio(
-                                                                                                        value: 1,
-                                                                                                        groupValue: id16,
-                                                                                                        onChanged: (val) {
+                                                                                                    leading: Radio<Q17Answer>(
+                                                                                                        value: Q17Answer.VPN,
+                                                                                                        groupValue: _q17answer,
+                                                                                                        onChanged: (Q17Answer? value) {
                                                                                                           setState(() {
-                                                                                                            id16 = 1;
+                                                                                                            _q17answer = value;
                                                                                                           });
                                                                                                         }),
                                                                                                     title: Text('VPN.', style: new TextStyle(fontSize: 16)),
                                                                                                   ),
                                                                                                   ListTile(
-                                                                                                    leading: Radio(
-                                                                                                        value: 2,
-                                                                                                        groupValue: id16,
-                                                                                                        onChanged: (val) {
+                                                                                                    leading: Radio<Q17Answer>(
+                                                                                                        value: Q17Answer.ManagedRouter,
+                                                                                                        groupValue: _q17answer,
+                                                                                                        onChanged: (Q17Answer? value) {
                                                                                                           setState(() {
-                                                                                                            id16 = 2;
+                                                                                                            _q17answer = value;
                                                                                                           });
                                                                                                         }),
                                                                                                     title: Text('Managed Router', style: new TextStyle(fontSize: 16)),
                                                                                                   ),
                                                                                                   ListTile(
-                                                                                                    leading: Radio(
-                                                                                                        value: 3,
-                                                                                                        groupValue: id16,
-                                                                                                        onChanged: (val) {
+                                                                                                    leading: Radio<Q17Answer>(
+                                                                                                        value: Q17Answer.NetworkIntrusionPreventSystem,
+                                                                                                        groupValue: _q17answer,
+                                                                                                        onChanged: (Q17Answer? value) {
                                                                                                           setState(() {
-                                                                                                            id16 = 3;
+                                                                                                            _q17answer = value;
                                                                                                           });
                                                                                                         }),
                                                                                                     title: Text('Network Intrusion Prevent System', style: new TextStyle(fontSize: 16)),
                                                                                                   ),
                                                                                                   ListTile(
-                                                                                                    leading: Radio(
-                                                                                                        value: 4,
-                                                                                                        groupValue: id16,
-                                                                                                        onChanged: (val) {
+                                                                                                    leading: Radio<Q17Answer>(
+                                                                                                        value: Q17Answer.VOIP,
+                                                                                                        groupValue: _q17answer,
+                                                                                                        onChanged: (Q17Answer? value) {
                                                                                                           setState(() {
-                                                                                                            id16 = 4;
+                                                                                                            _q17answer = value;
                                                                                                           });
                                                                                                         }),
                                                                                                     title: Text('VOIP', style: new TextStyle(fontSize: 16)),
@@ -1263,45 +1387,45 @@ class HomeState extends State<HomePage> {
                                                                                                   shrinkWrap: true,
                                                                                                   children: [
                                                                                                     ListTile(
-                                                                                                      leading: Radio(
-                                                                                                          value: 1,
-                                                                                                          groupValue: id17,
-                                                                                                          onChanged: (val) {
+                                                                                                      leading: Radio<Q18Answer>(
+                                                                                                          value: Q18Answer.PrivacyPolicy,
+                                                                                                          groupValue: _q18answer,
+                                                                                                          onChanged: (Q18Answer? value) {
                                                                                                             setState(() {
-                                                                                                              id17 = 1;
+                                                                                                              _q18answer = value;
                                                                                                             });
                                                                                                           }),
                                                                                                       title: Text('Privacy policy.', style: new TextStyle(fontSize: 16)),
                                                                                                     ),
                                                                                                     ListTile(
-                                                                                                      leading: Radio(
-                                                                                                          value: 2,
-                                                                                                          groupValue: id17,
-                                                                                                          onChanged: (val) {
+                                                                                                      leading: Radio<Q18Answer>(
+                                                                                                          value: Q18Answer.DataDisclosureAgreement,
+                                                                                                          groupValue: _q18answer,
+                                                                                                          onChanged: (Q18Answer? value) {
                                                                                                             setState(() {
-                                                                                                              id17 = 2;
+                                                                                                              _q18answer = value;
                                                                                                             });
                                                                                                           }),
                                                                                                       title: Text('Data disclose agreement', style: new TextStyle(fontSize: 16)),
                                                                                                     ),
                                                                                                     ListTile(
-                                                                                                      leading: Radio(
-                                                                                                          value: 3,
-                                                                                                          groupValue: id17,
-                                                                                                          onChanged: (val) {
+                                                                                                      leading: Radio<Q18Answer>(
+                                                                                                          value: Q18Answer.DataGuidelines,
+                                                                                                          groupValue: _q18answer,
+                                                                                                          onChanged: (Q18Answer? value) {
                                                                                                             setState(() {
-                                                                                                              id17 = 3;
+                                                                                                              _q18answer = value;
                                                                                                             });
                                                                                                           }),
                                                                                                       title: Text('Data guidelines', style: new TextStyle(fontSize: 16)),
                                                                                                     ),
                                                                                                     ListTile(
-                                                                                                      leading: Radio(
-                                                                                                          value: 4,
-                                                                                                          groupValue: id17,
-                                                                                                          onChanged: (val) {
+                                                                                                      leading: Radio<Q18Answer>(
+                                                                                                          value: Q18Answer.PrivacyDisclosureAgreement,
+                                                                                                          groupValue: _q18answer,
+                                                                                                          onChanged: (Q18Answer? value) {
                                                                                                             setState(() {
-                                                                                                              id17 = 4;
+                                                                                                              _q18answer = value;
                                                                                                             });
                                                                                                           }),
                                                                                                       title: Text('Privacy disclosure agreement', style: new TextStyle(fontSize: 16)),
@@ -1320,45 +1444,45 @@ class HomeState extends State<HomePage> {
                                                                                                     shrinkWrap: true,
                                                                                                     children: [
                                                                                                       ListTile(
-                                                                                                        leading: Radio(
-                                                                                                            value: 1,
-                                                                                                            groupValue: id18,
-                                                                                                            onChanged: (val) {
+                                                                                                        leading: Radio<Q19Answer>(
+                                                                                                            value: Q19Answer.Option1,
+                                                                                                            groupValue: _q19answer,
+                                                                                                            onChanged: (Q19Answer? value) {
                                                                                                               setState(() {
-                                                                                                                id18 = 1;
+                                                                                                                _q19answer = value;
                                                                                                               });
                                                                                                             }),
                                                                                                         title: Text('Install apps from a third-party app store.', style: new TextStyle(fontSize: 16)),
                                                                                                       ),
                                                                                                       ListTile(
-                                                                                                        leading: Radio(
-                                                                                                            value: 2,
-                                                                                                            groupValue: id18,
-                                                                                                            onChanged: (val) {
+                                                                                                        leading: Radio<Q19Answer>(
+                                                                                                            value: Q19Answer.Option2,
+                                                                                                            groupValue: _q19answer,
+                                                                                                            onChanged: (Q19Answer? value) {
                                                                                                               setState(() {
-                                                                                                                id18 = 2;
+                                                                                                                _q19answer = value;
                                                                                                               });
                                                                                                             }),
                                                                                                         title: Text('Tweak system settings to improve performance.', style: new TextStyle(fontSize: 16)),
                                                                                                       ),
                                                                                                       ListTile(
-                                                                                                        leading: Radio(
-                                                                                                            value: 3,
-                                                                                                            groupValue: id18,
-                                                                                                            onChanged: (val) {
+                                                                                                        leading: Radio<Q19Answer>(
+                                                                                                            value: Q19Answer.Option3,
+                                                                                                            groupValue: _q19answer,
+                                                                                                            onChanged: (Q19Answer? value) {
                                                                                                               setState(() {
-                                                                                                                id18 = 3;
+                                                                                                                _q19answer = value;
                                                                                                               });
                                                                                                             }),
                                                                                                         title: Text('Install updates to apps and operating systems.', style: new TextStyle(fontSize: 16)),
                                                                                                       ),
                                                                                                       ListTile(
-                                                                                                        leading: Radio(
-                                                                                                            value: 4,
-                                                                                                            groupValue: id18,
-                                                                                                            onChanged: (val) {
+                                                                                                        leading: Radio<Q19Answer>(
+                                                                                                            value: Q19Answer.Option4,
+                                                                                                            groupValue: _q19answer,
+                                                                                                            onChanged: (Q19Answer? value) {
                                                                                                               setState(() {
-                                                                                                                id18 = 4;
+                                                                                                                _q19answer = value;
                                                                                                               });
                                                                                                             }),
                                                                                                         title: Text('All of these actions put you at great risk.', style: new TextStyle(fontSize: 16)),
@@ -1377,45 +1501,45 @@ class HomeState extends State<HomePage> {
                                                                                                       shrinkWrap: true,
                                                                                                       children: [
                                                                                                         ListTile(
-                                                                                                          leading: Radio(
-                                                                                                              value: 1,
-                                                                                                              groupValue: id19,
-                                                                                                              onChanged: (val) {
+                                                                                                          leading: Radio<Q20Answer>(
+                                                                                                              value: Q20Answer.Government,
+                                                                                                              groupValue: _q20answer,
+                                                                                                              onChanged: (Q20Answer? value) {
                                                                                                                 setState(() {
-                                                                                                                  id19 = 1;
+                                                                                                                  _q20answer = value;
                                                                                                                 });
                                                                                                               }),
                                                                                                           title: Text('Government.', style: new TextStyle(fontSize: 16)),
                                                                                                         ),
                                                                                                         ListTile(
-                                                                                                          leading: Radio(
-                                                                                                              value: 2,
-                                                                                                              groupValue: id19,
-                                                                                                              onChanged: (val) {
+                                                                                                          leading: Radio<Q20Answer>(
+                                                                                                              value: Q20Answer.SocialMedia,
+                                                                                                              groupValue: _q20answer,
+                                                                                                              onChanged: (Q20Answer? value) {
                                                                                                                 setState(() {
-                                                                                                                  id19 = 2;
+                                                                                                                  _q20answer = value;
                                                                                                                 });
                                                                                                               }),
                                                                                                           title: Text('Social Media', style: new TextStyle(fontSize: 16)),
                                                                                                         ),
                                                                                                         ListTile(
-                                                                                                          leading: Radio(
-                                                                                                              value: 3,
-                                                                                                              groupValue: id19,
-                                                                                                              onChanged: (val) {
+                                                                                                          leading: Radio<Q20Answer>(
+                                                                                                              value: Q20Answer.InformationalNews,
+                                                                                                              groupValue: _q20answer,
+                                                                                                              onChanged: (Q20Answer? value) {
                                                                                                                 setState(() {
-                                                                                                                  id19 = 3;
+                                                                                                                  _q20answer = value;
                                                                                                                 });
                                                                                                               }),
                                                                                                           title: Text('Informational/News', style: new TextStyle(fontSize: 16)),
                                                                                                         ),
                                                                                                         ListTile(
-                                                                                                          leading: Radio(
-                                                                                                              value: 4,
-                                                                                                              groupValue: id19,
-                                                                                                              onChanged: (val) {
+                                                                                                          leading: Radio<Q20Answer>(
+                                                                                                              value: Q20Answer.AlloftheAbove,
+                                                                                                              groupValue: _q20answer,
+                                                                                                              onChanged: (Q20Answer? value) {
                                                                                                                 setState(() {
-                                                                                                                  id19 = 4;
+                                                                                                                  _q20answer = value;
                                                                                                                 });
                                                                                                               }),
                                                                                                           title: Text('All of the Above', style: new TextStyle(fontSize: 16)),
@@ -1434,45 +1558,45 @@ class HomeState extends State<HomePage> {
                                                                                                         shrinkWrap: true,
                                                                                                         children: [
                                                                                                           ListTile(
-                                                                                                            leading: Radio(
-                                                                                                                value: 1,
-                                                                                                                groupValue: id20,
-                                                                                                                onChanged: (val) {
+                                                                                                            leading: Radio<Q21Answer>(
+                                                                                                                value: Q21Answer.Option1,
+                                                                                                                groupValue: _q21answer,
+                                                                                                                onChanged: (Q21Answer? value) {
                                                                                                                   setState(() {
-                                                                                                                    id20 = 1;
+                                                                                                                    _q21answer = value;
                                                                                                                   });
                                                                                                                 }),
                                                                                                             title: Text('Use the same password/passphrase for all of the accounts that you have.', style: new TextStyle(fontSize: 16)),
                                                                                                           ),
                                                                                                           ListTile(
-                                                                                                            leading: Radio(
-                                                                                                                value: 2,
-                                                                                                                groupValue: id20,
-                                                                                                                onChanged: (val) {
+                                                                                                            leading: Radio<Q21Answer>(
+                                                                                                                value: Q21Answer.Option2,
+                                                                                                                groupValue: _q21answer,
+                                                                                                                onChanged: (Q21Answer? value) {
                                                                                                                   setState(() {
-                                                                                                                    id20 = 2;
+                                                                                                                    _q21answer = value;
                                                                                                                   });
                                                                                                                 }),
                                                                                                             title: Text('Use a selection of 3-4 complex passwords/passphrases for all of the accounts that you have.', style: new TextStyle(fontSize: 16)),
                                                                                                           ),
                                                                                                           ListTile(
-                                                                                                            leading: Radio(
-                                                                                                                value: 3,
-                                                                                                                groupValue: id20,
-                                                                                                                onChanged: (val) {
+                                                                                                            leading: Radio<Q21Answer>(
+                                                                                                                value: Q21Answer.Option3,
+                                                                                                                groupValue: _q21answer,
+                                                                                                                onChanged: (Q21Answer? value) {
                                                                                                                   setState(() {
-                                                                                                                    id20 = 3;
+                                                                                                                    _q21answer = value;
                                                                                                                   });
                                                                                                                 }),
                                                                                                             title: Text('Use something personal that is easy to remember, like your date of birth or the street that you live on.', style: new TextStyle(fontSize: 16)),
                                                                                                           ),
                                                                                                           ListTile(
-                                                                                                            leading: Radio(
-                                                                                                                value: 4,
-                                                                                                                groupValue: id20,
-                                                                                                                onChanged: (val) {
+                                                                                                            leading: Radio<Q21Answer>(
+                                                                                                                value: Q21Answer.Option4,
+                                                                                                                groupValue: _q21answer,
+                                                                                                                onChanged: (Q21Answer? value) {
                                                                                                                   setState(() {
-                                                                                                                    id20 = 4;
+                                                                                                                    _q21answer = value;
                                                                                                                   });
                                                                                                                 }),
                                                                                                             title: Text('Use a unique, complex password/passphrase for each account that you have.', style: new TextStyle(fontSize: 16)),
@@ -1491,45 +1615,45 @@ class HomeState extends State<HomePage> {
                                                                                                           shrinkWrap: true,
                                                                                                           children: [
                                                                                                             ListTile(
-                                                                                                              leading: Radio(
-                                                                                                                  value: 1,
-                                                                                                                  groupValue: id21,
-                                                                                                                  onChanged: (val) {
+                                                                                                              leading: Radio<Q22Answer>(
+                                                                                                                  value: Q22Answer.Ransomware,
+                                                                                                                  groupValue: _q22answer,
+                                                                                                                  onChanged: (Q22Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id21 = 1;
+                                                                                                                      _q22answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               title: Text('Ransomware.', style: new TextStyle(fontSize: 16)),
                                                                                                             ),
                                                                                                             ListTile(
-                                                                                                              leading: Radio(
-                                                                                                                  value: 2,
-                                                                                                                  groupValue: id21,
-                                                                                                                  onChanged: (val) {
+                                                                                                              leading: Radio<Q22Answer>(
+                                                                                                                  value: Q22Answer.Threatware,
+                                                                                                                  groupValue: _q22answer,
+                                                                                                                  onChanged: (Q22Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id21 = 2;
+                                                                                                                      _q22answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               title: Text('Threatware', style: new TextStyle(fontSize: 16)),
                                                                                                             ),
                                                                                                             ListTile(
-                                                                                                              leading: Radio(
-                                                                                                                  value: 3,
-                                                                                                                  groupValue: id21,
-                                                                                                                  onChanged: (val) {
+                                                                                                              leading: Radio<Q22Answer>(
+                                                                                                                  value: Q22Answer.Malware,
+                                                                                                                  groupValue: _q22answer,
+                                                                                                                  onChanged: (Q22Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id21 = 3;
+                                                                                                                      _q22answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               title: Text('Malware', style: new TextStyle(fontSize: 16)),
                                                                                                             ),
                                                                                                             ListTile(
-                                                                                                              leading: Radio(
-                                                                                                                  value: 4,
-                                                                                                                  groupValue: id21,
-                                                                                                                  onChanged: (val) {
+                                                                                                              leading: Radio<Q22Answer>(
+                                                                                                                  value: Q22Answer.Spyware,
+                                                                                                                  groupValue: _q22answer,
+                                                                                                                  onChanged: (Q22Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id21 = 4;
+                                                                                                                      _q22answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               title: Text('Spyware', style: new TextStyle(fontSize: 16)),
@@ -1561,48 +1685,48 @@ class HomeState extends State<HomePage> {
                                                                                                           Row(
                                                                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                                                                             children: [
-                                                                                                              Radio(
-                                                                                                                  value: 1,
-                                                                                                                  groupValue: id22,
-                                                                                                                  onChanged: (val) {
+                                                                                                              Radio<Q23Answer>(
+                                                                                                                  value: Q23Answer.StronglyDisagree,
+                                                                                                                  groupValue: _q23answer,
+                                                                                                                  onChanged: (Q23Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id22 = 1;
+                                                                                                                      _q23answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               Text('Strongly Disagree', style: new TextStyle(fontSize: 16)),
-                                                                                                              Radio(
-                                                                                                                  value: 2,
-                                                                                                                  groupValue: id22,
-                                                                                                                  onChanged: (val) {
+                                                                                                              Radio<Q23Answer>(
+                                                                                                                  value: Q23Answer.Disagree,
+                                                                                                                  groupValue: _q23answer,
+                                                                                                                  onChanged: (Q23Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id22 = 2;
+                                                                                                                      _q23answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               Text('Disagree', style: new TextStyle(fontSize: 16)),
-                                                                                                              Radio(
-                                                                                                                  value: 3,
-                                                                                                                  groupValue: id22,
-                                                                                                                  onChanged: (val) {
+                                                                                                              Radio<Q23Answer>(
+                                                                                                                  value: Q23Answer.Neutral,
+                                                                                                                  groupValue: _q23answer,
+                                                                                                                  onChanged: (Q23Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id22 = 3;
+                                                                                                                      _q23answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               Text('Neutral', style: new TextStyle(fontSize: 16)),
-                                                                                                              Radio(
-                                                                                                                  value: 4,
-                                                                                                                  groupValue: id22,
-                                                                                                                  onChanged: (val) {
+                                                                                                              Radio<Q23Answer>(
+                                                                                                                  value: Q23Answer.Agree,
+                                                                                                                  groupValue: _q23answer,
+                                                                                                                  onChanged: (Q23Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id22 = 4;
+                                                                                                                      _q23answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               Text('Agree', style: new TextStyle(fontSize: 16)),
-                                                                                                              Radio(
-                                                                                                                  value: 5,
-                                                                                                                  groupValue: id22,
-                                                                                                                  onChanged: (val) {
+                                                                                                              Radio<Q23Answer>(
+                                                                                                                  value: Q23Answer.StronglyAgree,
+                                                                                                                  groupValue: _q23answer,
+                                                                                                                  onChanged: (Q23Answer? value) {
                                                                                                                     setState(() {
-                                                                                                                      id22 = 5;
+                                                                                                                      _q23answer = value;
                                                                                                                     });
                                                                                                                   }),
                                                                                                               Text(' Strongly Agree', style: new TextStyle(fontSize: 16)),
@@ -1620,11 +1744,38 @@ class HomeState extends State<HomePage> {
                                                                                                                       const SnackBar(content: Text('Submiting Data')),
                                                                                                                     );
                                                                                                                   }
-                                                                                                                  
+                                                                                                                  //adding name field to clound firestore.
+                                                                                                                  FirebaseFirestore.instance.collection("Survey Answers").add({
+                                                                                                                    'person_Name': _nameField.text,
+                                                                                                                    'Q1': _q1answer.toString(),
+                                                                                                                    'Q2': _q2answer.toString(),
+                                                                                                                    //TODO Add only selected answers
+                                                                                                                    'Q3': values.keys,
+                                                                                                                    'Q4': _q4answer.toString(),
+                                                                                                                    'Q5': _q5answer.toString(),
+                                                                                                                    'Q6': _q6answer.toString(),
+                                                                                                                    'Q7': _q7answer.toString(),
+                                                                                                                    'Q8': _q8answer.toString(),
+                                                                                                                    'Q9': _q9answer.toString(),
+                                                                                                                    'Q10': _q10answer.toString(),
+                                                                                                                    'Q11': _q11answer.toString(),
+                                                                                                                    'Q12': _q12answer.toString(),
+                                                                                                                    'Q13': _q13answer.toString(),
+                                                                                                                    'Q14': _q14answer.toString(),
+                                                                                                                    'Q15': _q15answer.toString(),
+                                                                                                                    'Q16': _q16answer.toString(),
+                                                                                                                    'Q17': _q17answer.toString(),
+                                                                                                                    'Q18': _q18answer.toString(),
+                                                                                                                    'Q19': _q19answer.toString(),
+                                                                                                                    'Q20': _q20answer.toString(),
+                                                                                                                    'Q21': _q21answer.toString(),
+                                                                                                                    'Q22': _q22answer.toString(),
+                                                                                                                    'Q23': _q23answer.toString(),
+                                                                                                                  });
+
                                                                                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => ThankYou()));
                                                                                                                 },
-                                                                                                                //TODO add record data fucntionlity
-                                                                                                             
+
                                                                                                                 //TODO add validation for the entire form.
 
                                                                                                                 child: Text('Submit',
