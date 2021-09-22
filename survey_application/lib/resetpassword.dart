@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ResetPassword extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class ResetPassword extends StatefulWidget {
 
 class _State extends State<ResetPassword> {
   TextEditingController emailController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,8 @@ class _State extends State<ResetPassword> {
                             borderRadius: BorderRadius.circular(50.0)),
                       ),
                       child: Text('Reset'),
-                      onPressed: () {
+                      onPressed: () async {
+                        await _auth.sendPasswordResetEmail(email: emailController.text);
                         Navigator.pop(context);
                       },
                     )),
