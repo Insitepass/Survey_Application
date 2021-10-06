@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_application/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class IntroPages extends StatelessWidget {
   @override
@@ -32,6 +34,15 @@ class IntroPages extends StatelessWidget {
                   padding: EdgeInsets.all(20),
                   child: ElevatedButton(
                       onPressed: () {
+                         //TimeStamp collection
+                        DateTime currentDate = DateTime.now();
+                        final _auth = FirebaseAuth.instance;
+                        FirebaseFirestore.instance
+                            .collection('TimeStamps')
+                            .add({
+                          'login_time': currentDate.toString(),
+                          'email': _auth.currentUser!.email
+                        });
                         Navigator.push(
                             context,
                             MaterialPageRoute(
