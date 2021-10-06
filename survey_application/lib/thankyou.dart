@@ -38,6 +38,15 @@ class ThankYou extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {
+                    
+                    //TimeStamp collection
+                    DateTime currentDate = DateTime.now();
+                    final _auth = FirebaseAuth.instance;
+                    FirebaseFirestore.instance.collection('TimeStamps').add({
+                      'email': _auth.currentUser!.email,
+                      'logout_time': currentDate.toString(),
+                    });
+                    
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginPage()));
                   },
