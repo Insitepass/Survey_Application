@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_application/Intro.dart';
+import 'package:survey_application/dashboard.dart';
 import 'package:survey_application/home.dart';
 import 'package:survey_application/resetpassword.dart';
 import 'signUp.dart';
@@ -82,7 +83,7 @@ class _State extends State<LoginPage> {
 
                                     await Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (contex) => HomePage(),
+                                        builder: (contex) => Dashboard(),
                                       ),
                                     );
                                          
@@ -105,7 +106,7 @@ class _State extends State<LoginPage> {
                     TextButton(
                       //textColor: Colors.blue,
                       child: Text(
-                        'Sign in',
+                        'Sign up',
                         style: TextStyle(fontSize: 15),
                       ),
                       onPressed: () {
